@@ -3,16 +3,12 @@ package com.example.jump.game
 import android.content.Context
 import com.example.jump.PlayerState
 import com.example.jump.engine.*
+import com.example.jump.logic.BoundingBoxHandler
+import com.example.jump.logic.MoveHandler
 
 class DummyGame(private val context: Context) {
-    private val gameItemTextureWidth = 61
-    private val gameItemTextureHeight = 49
-    private val screenWidth = 125
-    private val screenHeight = 200
-    private val backgroundHeight = 801
-    private val groundHeight = 67
-    private val platformHeight = 17
-    private val platformDistance = 80
+    private val moveHandler = MoveHandler()
+    private val boundingBoxHandler = BoundingBoxHandler()
 
     private val waiting: Sprite = Sprite(context, "textures/waiting/waiting_", 4, Vector2D(-30.5f, -133f), 6)
     private val jump: Sprite = Sprite(context, "textures/jump/jump_", 6, Vector2D(-30.5f, -133f), 6)
@@ -41,17 +37,17 @@ class DummyGame(private val context: Context) {
     private val platformSprite5 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(10f, 255f), 6)
     private val platformSprite6 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(-110f, 335f), 6)
 
-    private val layerBackground = K2DGraphicsLayer("background", 0, 0.05f)
-    private val layerGround = K2DGraphicsLayer("ground", 1, 0f)
-    private val layerPlatform = K2DGraphicsLayer("platform", 2, 0.05f)
+    val layerBackground = K2DGraphicsLayer("background", 0, 0.05f)
+    val layerGround = K2DGraphicsLayer("ground", 1, 0f)
+    val layerPlatform = K2DGraphicsLayer("platform", 2, 0.05f)
     private val layerPlayer = K2DGraphicsLayer("player", 3, 0.05f)
 
     private val layerBackgroundCamera = Camera2D(0f, 0f, 0)
     private val layerPlayerCamera = Camera2D(0f, 0f, 0)
     private val layerPlatformCamera = Camera2D(0f, 0f, 0)
 
-    private var gameStarted: Boolean = false
-    private var highestPlatform: GameObject
+    var gameStarted: Boolean = false
+    var highestPlatform: GameObject
 
     init {
         //set the positions of the textures
@@ -109,177 +105,10 @@ class DummyGame(private val context: Context) {
 
     fun render(renderer: MainRenderer) {
         sceneManager.render(renderer)
-        updatePlayerPosition()
+        moveHandler.updatePlayerPosition(this)
         if (gameStarted) {
-            moveScene()
-            checkBoundingBox()
-        }
-    }
-
-    private fun updatePlayerPosition() {
-        val state = gameItem.state
-        val position = gameItem.position
-
-        val speed = 0.7f
-
-        val jumpSpriteIndex = 1
-        val leftMoveSpriteIndex = 2
-        val rightMoveSpriteIndex = 3
-
-        when(state) {
-            PlayerState.JUMP -> {
-                gameStarted = true
-                if(position.y < (screenHeight - gameItemTextureHeight)) {
-                    gameItem.currSprite = jumpSpriteIndex
-                    val sprite = gameItem.mSprites[gameItem.currSprite]
-                    val pos = Vector2D(gameItem.position.x, gameItem.position.y + 50f)
-                    gameItem.position = pos
-                    sprite.setPosition(pos)
-                    gameItem.state = PlayerState.FALL
-                }
-            }
-            PlayerState.LEFT -> {
-                if(position.x > -screenWidth) {
-                    gameItem.currSprite = leftMoveSpriteIndex
-
-                    val sprite = gameItem.mSprites[gameItem.currSprite]
-                    val pos = Vector2D(gameItem.position.x - speed, gameItem.position.y)
-
-                    gameItem.position = pos
-                    sprite.setPosition(pos)
-                }
-            }
-            PlayerState.RIGHT -> {
-                if(position.x < (screenWidth - gameItemTextureWidth)) {
-                    gameItem.currSprite = rightMoveSpriteIndex
-
-                    val sprite = gameItem.mSprites[gameItem.currSprite]
-                    val pos = Vector2D(gameItem.position.x + speed, gameItem.position.y)
-
-                    gameItem.position = pos
-                    sprite.setPosition(pos)
-                }
-            }
-            PlayerState.FALL -> {
-                if(position.y > -screenHeight) {
-                    gameItem.currSprite = rightMoveSpriteIndex
-
-                    val sprite = gameItem.mSprites[gameItem.currSprite]
-                    val pos = Vector2D(gameItem.position.x, gameItem.position.y - 1f)
-
-                    gameItem.position = pos
-                    sprite.setPosition(pos)
-                }
-            }
-            PlayerState.FALL_LEFT -> {
-                if(position.x > -screenWidth) {
-                    gameItem.currSprite = leftMoveSpriteIndex
-
-                    val sprite = gameItem.mSprites[gameItem.currSprite]
-                    val pos = Vector2D(gameItem.position.x - speed, gameItem.position.y - 1f)
-
-                    gameItem.position = pos
-                    sprite.setPosition(pos)
-                }
-            }
-            PlayerState.FALL_RIGHT -> {
-                if(position.x < (screenWidth - gameItemTextureWidth)) {
-                    gameItem.currSprite = rightMoveSpriteIndex
-
-                    val sprite = gameItem.mSprites[gameItem.currSprite]
-                    val pos = Vector2D(gameItem.position.x + speed, gameItem.position.y - 1f)
-
-                    gameItem.position = pos
-                    sprite.setPosition(pos)
-                }
-            }
-        }
-    }
-
-    private fun checkBoundingBox() {
-        val playerBox = gameItem.getBoundingBox()
-        val playerState = gameItem.state
-
-        for (platform in layerPlatform.mObjectList) {
-            val platformBox = platform.getBoundingBox()
-
-            if (playerState != PlayerState.ON_PLATFORM) {
-               if(playerBox.minpoint.y == platformBox.maxpoint.y &&
-                       playerBox.maxpoint.x >= platformBox.minpoint.x &&
-                       playerBox.minpoint.x <= platformBox.maxpoint.x) {
-                   gameItem.state = PlayerState.ON_PLATFORM
-               }
-            }
-        }
-    }
-
-    private fun moveScene() {
-        val speed = 0.5f
-
-        val backgroundShift = 795f
-
-        val platformBottom = -screenHeight - platformHeight
-
-        //move background
-        val backgroundTexture1 = layerBackground.getTexture(0)
-        val backgroundTexture2 = layerBackground.getTexture(1)
-        if (backgroundTexture1 != null && backgroundTexture2 != null) {
-            val background1Y = backgroundTexture1.position.y
-            val background2Y = backgroundTexture2.position.y
-
-            if (background1Y > (-screenHeight - backgroundHeight)) {
-                backgroundTexture1.position.y = background1Y - speed
-            } else {
-                backgroundTexture1.position.y = background2Y + backgroundShift //put background on top of the other
-            }
-
-            if (background2Y > (-screenHeight - backgroundHeight)) {
-                backgroundTexture2.position.y = background2Y - speed
-            } else {
-                backgroundTexture2.position.y = background1Y + backgroundShift
-            }
-        }
-
-        //move ground
-        val groundTexture = layerGround.getTexture(0)
-        if (groundTexture != null) {
-            val groundY = groundTexture.position.y
-            if (groundY > (-screenHeight - groundHeight)) {
-                groundTexture.position.y = groundTexture.position.y - speed
-            } else {
-                layerGround.clear()
-            }
-        }
-
-        //move platforms
-        val platformList = layerPlatform.mObjectList
-        for (platform in platformList) {
-            val platformY = platform.position.y
-            val platformSprite = platform.mSprites[platform.currSprite]
-            var pos: Vector2D
-
-            if (platformY > platformBottom) {
-                pos = Vector2D(platform.position.x, platformY - speed)
-                platform.position = pos
-                platformSprite.setPosition(pos)
-            } else {
-                pos = Vector2D(platform.position.x, highestPlatform.position.y + platformDistance)
-                highestPlatform = platform
-                platform.position = pos
-                platformSprite.setPosition(pos)
-            }
-        }
-
-        //move game item
-        val gameItemY = gameItem.position.y
-        if (gameItemY > -screenHeight) {
-            val pos = Vector2D(gameItem.position.x, gameItemY - speed)
-            val gameItemSprite = gameItem.mSprites[gameItem.currSprite]
-            gameItem.position = pos
-            gameItemSprite.setPosition(pos)
-        } else {
-            gameStarted = false
-            //TODO endgame
+            moveHandler.moveScene(this)
+            boundingBoxHandler.checkBoundingBox(this)
         }
     }
 }

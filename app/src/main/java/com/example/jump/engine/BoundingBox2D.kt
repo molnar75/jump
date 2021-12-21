@@ -18,8 +18,6 @@ class BoundingBox2D(newMinPoint: Vector2D, newMaxPoint: Vector2D) {
 
     var mEnabled: Boolean
 
-    private var color = floatArrayOf(0.9f, 0.1f, 0.0f, 1.0f)
-
     private val coordsPerVertex = 3
     private val vertexStride = coordsPerVertex * 4 // 4 bytes per vertex
 
@@ -133,7 +131,7 @@ class BoundingBox2D(newMinPoint: Vector2D, newMaxPoint: Vector2D) {
 
     fun render(shaderProgram: ShaderProgram) {
 
-        val util: Utils = Utils()
+        val util = Utils()
 
         if (!mEnabled){
             return
@@ -164,23 +162,5 @@ class BoundingBox2D(newMinPoint: Vector2D, newMaxPoint: Vector2D) {
         glDisableVertexAttribArray(posAttrib)
 
         shaderProgram.unbind()
-    }
-
-    fun checkOverlapping(box: BoundingBox2D): Boolean {
-        if (maxpoint.x < box.minpoint.x || minpoint.x > box.maxpoint.x) {
-            return false
-        }
-        if (maxpoint.y < box.minpoint.y || minpoint.y > box.maxpoint.y) {
-            return false
-        }
-        return true
-    }
-
-    fun getMinPoint(): Vector2D {
-        return minpoint
-    }
-
-    fun getMaxPoint(): Vector2D {
-        return maxpoint
     }
 }

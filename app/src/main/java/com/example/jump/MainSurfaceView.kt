@@ -4,6 +4,7 @@ import android.content.Context
 import android.opengl.GLSurfaceView
 import android.view.MotionEvent
 import com.example.jump.game.MainRenderer
+import com.example.jump.logic.TouchHandler
 
 private const val TOUCH_SCALE_FACTOR: Float = 180.0f / 320f
 
@@ -27,33 +28,11 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
-        val x: Float = e.x
         val gameItem = mainRenderer.dummyGame.gameItem
+        val touchHandler = TouchHandler()
 
-        if(e.action == MotionEvent.ACTION_DOWN) {
-                val oneThird = width / 3
-                if (x < oneThird) {
-                    if (gameItem.state == PlayerState.FALL) {
-                        gameItem.state = PlayerState.FALL_LEFT
-                    } else {
-                        if (gameItem.state == PlayerState.ON_PLATFORM) {
-                            gameItem.state = PlayerState.LEFT
-                        }
-                    }
-                } else if (x >= oneThird && x < 2 * oneThird) {
-                    gameItem.state = PlayerState.JUMP
-                } else if(gameItem.state == PlayerState.FALL) {
-                    gameItem.state = PlayerState.FALL_RIGHT
-                } else {
-                    if (gameItem.state == PlayerState.ON_PLATFORM) {
-                        gameItem.state = PlayerState.RIGHT
-                    }
-                }
-            } else if (e.action == MotionEvent.ACTION_UP) {
-                if (gameItem.state != PlayerState.FALL) {
-                    gameItem.state = PlayerState.WAIT
-                }
-            }
+        touchHandler.checkInput(e, gameItem, width)
+
         return true
     }
 }
