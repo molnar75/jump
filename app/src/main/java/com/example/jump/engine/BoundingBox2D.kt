@@ -16,7 +16,7 @@ class BoundingBox2D(newMinPoint: Vector2D, newMaxPoint: Vector2D) {
     private val transformationMatrix: FloatArray
     private val rotationMatrix: FloatArray
 
-    var mEnabled: Boolean
+    private var mEnabled: Boolean
 
     private val coordsPerVertex = 3
     private val vertexStride = coordsPerVertex * 4 // 4 bytes per vertex

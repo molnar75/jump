@@ -1,7 +1,6 @@
 package com.example.jump.engine
 
 import com.example.jump.game.MainRenderer
-import com.example.jump.graph.ShaderProgram
 
 class K2DScene {
     private var mLayers: ArrayList<K2DGraphicsLayer> = ArrayList()

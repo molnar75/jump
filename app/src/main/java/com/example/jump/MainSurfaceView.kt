@@ -6,8 +6,6 @@ import android.view.MotionEvent
 import com.example.jump.game.MainRenderer
 import com.example.jump.logic.TouchHandler
 
-private const val TOUCH_SCALE_FACTOR: Float = 180.0f / 320f
-
 class MainSurfaceView(context: Context) : GLSurfaceView(context) {
 
     private val mainRenderer: MainRenderer

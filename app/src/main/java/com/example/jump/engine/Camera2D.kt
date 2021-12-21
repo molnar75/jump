@@ -1,8 +1,5 @@
 package com.example.jump.engine
 
-import android.opengl.Matrix.setLookAtM
-import android.opengl.Matrix.translateM
-
 class Camera2D(x: Float, y: Float, id: Int) {
     var mPosition: Vector2D = Vector2D(x, y)
 

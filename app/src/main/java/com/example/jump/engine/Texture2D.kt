@@ -9,7 +9,6 @@ import android.opengl.GLUtils
 import android.opengl.Matrix.*
 import com.example.jump.game.MainRenderer
 import com.example.jump.graph.Mesh
-import com.example.jump.graph.ShaderProgram
 
 class Texture2D(
     private val context: Context,

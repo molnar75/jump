@@ -3,7 +3,7 @@ package com.example.jump.engine
 import android.content.Context
 import com.example.jump.game.MainRenderer
 
-class Sprite(private val context: Context, private val filenames: String, private val numOfFrames: Int, var mvSpritePosition: Vector2D, var miFps: Int) {
+class Sprite(private val context: Context, filenames: String, numOfFrames: Int, var mvSpritePosition: Vector2D, private var miFps: Int) {
     private val mvFrames: ArrayList<SpriteFrame> = ArrayList()
 
     // Actual frame
@@ -48,7 +48,7 @@ class Sprite(private val context: Context, private val filenames: String, privat
     }
     private fun update() {
         if (1000.0f / miFps < (System.currentTimeMillis() - miLastUpdate)) {
-            miLastUpdate = System.currentTimeMillis();
+            miLastUpdate = System.currentTimeMillis()
             if(++miActualFrame == mvFrames.size){
                 miActualFrame = 0
             }

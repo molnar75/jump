@@ -1,12 +1,11 @@
 package com.example.jump.game
 
 import android.content.Context
-import com.example.jump.PlayerState
 import com.example.jump.engine.*
 import com.example.jump.logic.BoundingBoxHandler
 import com.example.jump.logic.MoveHandler
 
-class DummyGame(private val context: Context) {
+class DummyGame(context: Context) {
     private val moveHandler = MoveHandler()
     private val boundingBoxHandler = BoundingBoxHandler()
 

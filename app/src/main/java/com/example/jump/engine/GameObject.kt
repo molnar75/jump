@@ -1,11 +1,9 @@
 package com.example.jump.engine
 
-import android.content.Context
 import com.example.jump.PlayerState
 import com.example.jump.game.MainRenderer
-import com.example.jump.graph.ShaderProgram
 
-class GameObject(private val context: Context, var position: Vector2D, var state: PlayerState = PlayerState.WAIT) {
+class GameObject(var position: Vector2D, var state: PlayerState = PlayerState.WAIT) {
     var mSprites: ArrayList<Sprite> = ArrayList()
     var currSprite: Int = 0
 

@@ -1,6 +1,5 @@
 package com.example.jump.graph
 
-import android.opengl.GLES20
 import android.opengl.GLES30.*
 import com.example.jump.engine.Texture2D
 import com.example.jump.engine.Utils
