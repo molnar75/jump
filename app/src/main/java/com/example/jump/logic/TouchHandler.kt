@@ -6,7 +6,6 @@ import com.example.jump.engine.GameObject
 
 class TouchHandler {
     fun checkInput(event: MotionEvent, gameItem: GameObject, width: Int) {
-
         val x: Float = event.x
 
         if (event.action == MotionEvent.ACTION_DOWN) {
@@ -25,9 +24,7 @@ class TouchHandler {
                 gameItem.state = PlayerState.RIGHT
             }
         } else if (event.action == MotionEvent.ACTION_UP) {
-            if (gameItem.state == PlayerState.ON_PLATFORM) {
-                gameItem.state = PlayerState.WAIT
-            } else {
+            if (gameItem.state != PlayerState.ON_PLATFORM) {
                 gameItem.state = PlayerState.FALL
             }
         }
