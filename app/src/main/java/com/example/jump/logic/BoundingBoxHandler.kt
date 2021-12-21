@@ -6,8 +6,8 @@ import com.example.jump.game.DummyGame
 
 class BoundingBoxHandler {
     fun checkBoundingBox(dummyGame: DummyGame) {
-        val playerBox = dummyGame.gameItem.getBoundingBox()
-        val playerState = dummyGame.gameItem.state
+        val playerBox = dummyGame.player.getBoundingBox()
+        val playerState = dummyGame.player.state
 
         for (platform in dummyGame.layerPlatform.mObjectList) {
             val platformBox = platform.getBoundingBox()
@@ -20,17 +20,17 @@ class BoundingBoxHandler {
                     if (((playerBox.maxpoint.x - 20) >= platformBox.minpoint.x && (playerBox.maxpoint.x - 20) <= platformBox.maxpoint.x) ||
                         ((playerBox.minpoint.x + 20) >= platformBox.minpoint.x && (playerBox.minpoint.x + 20) <= platformBox.maxpoint.x)
                     ) {
-                        dummyGame.gameItem.state = PlayerState.ON_PLATFORM
+                        dummyGame.player.state = PlayerState.ON_PLATFORM
                     }
                 }
             }
             if (playerState == PlayerState.RIGHT || playerState == PlayerState.LEFT) {
                 if (isYMatch(playerBox, platformBox)) {
                     if (playerState == PlayerState.RIGHT && ((playerBox.minpoint.x + 20) >= platformBox.maxpoint.x)) {
-                        dummyGame.gameItem.state = PlayerState.FALL_RIGHT
+                        dummyGame.player.state = PlayerState.FALL_RIGHT
                     }
                     if (playerState == PlayerState.LEFT && ((playerBox.maxpoint.x - 20) <= platformBox.minpoint.x)) {
-                        dummyGame.gameItem.state = PlayerState.FALL_LEFT
+                        dummyGame.player.state = PlayerState.FALL_LEFT
                     }
                 }
             }

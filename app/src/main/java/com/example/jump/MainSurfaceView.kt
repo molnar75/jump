@@ -26,7 +26,7 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
-        val gameItem = mainRenderer.dummyGame.gameItem
+        val gameItem = mainRenderer.dummyGame.player
         val touchHandler = TouchHandler()
 
         touchHandler.checkInput(e, gameItem, width)

@@ -17,7 +17,7 @@ class MoveHandler {
     private val platformDistance = 80
 
     fun updatePlayerPosition(dummyGame: DummyGame) {
-        val gameItem = dummyGame.gameItem
+        val gameItem = dummyGame.player
         val state = gameItem.state
         val position = gameItem.position
 
@@ -93,7 +93,7 @@ class MoveHandler {
 
         val layerBackground = dummyGame.layerBackground
         val layerGround = dummyGame.layerGround
-        val gameItem = dummyGame.gameItem
+        val gameItem = dummyGame.player
 
         //move background
         val backgroundTexture1 = layerBackground.getTexture(0)
