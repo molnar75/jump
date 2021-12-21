@@ -14,7 +14,7 @@ class DummyGame(context: Context) {
     private val left: Sprite = Sprite(context, "textures/left", 1, Vector2D(-30.5f, -133f), 6)
     private val right: Sprite = Sprite(context, "textures/right", 1, Vector2D(-30.5f, -133f), 6)
 
-    val gameItem = GameObject(context, Vector2D(-30.5f, -133f))
+    val gameItem = GameObject(Vector2D(-30.5f, -133f))
     private val sceneManager = K2DSceneManager()
     private val scene = K2DScene()
 
@@ -22,12 +22,12 @@ class DummyGame(context: Context) {
     private val background2 = Texture2D(context)
     private val ground = Texture2D(context)
 
-    private val platform1 = GameObject(context, Vector2D(10f, -65f))
-    private val platform2 = GameObject(context, Vector2D(-110f, 15f))
-    private val platform3 = GameObject(context, Vector2D(10f, 95f))
-    private val platform4 = GameObject(context, Vector2D(-110f, 175f))
-    private val platform5 = GameObject(context, Vector2D(10f, 255f))
-    private val platform6 = GameObject(context, Vector2D(-110f, 335f))
+    private val platform1 = GameObject(Vector2D(10f, -65f))
+    private val platform2 = GameObject(Vector2D(-110f, 15f))
+    private val platform3 = GameObject(Vector2D(10f, 95f))
+    private val platform4 = GameObject(Vector2D(-110f, 175f))
+    private val platform5 = GameObject(Vector2D(10f, 255f))
+    private val platform6 = GameObject(Vector2D(-110f, 335f))
 
     private val platformSprite1 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(10f, -65f), 6)
     private val platformSprite2 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(-110f, 15f), 6)
@@ -36,10 +36,10 @@ class DummyGame(context: Context) {
     private val platformSprite5 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(10f, 255f), 6)
     private val platformSprite6 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(-110f, 335f), 6)
 
-    val layerBackground = K2DGraphicsLayer("background", 0, 0.05f)
-    val layerGround = K2DGraphicsLayer("ground", 1, 0f)
-    val layerPlatform = K2DGraphicsLayer("platform", 2, 0.05f)
-    private val layerPlayer = K2DGraphicsLayer("player", 3, 0.05f)
+    val layerBackground = K2DGraphicsLayer(0)
+    val layerGround = K2DGraphicsLayer(1)
+    val layerPlatform = K2DGraphicsLayer(2)
+    private val layerPlayer = K2DGraphicsLayer(3)
 
     private val layerBackgroundCamera = Camera2D(0f, 0f, 0)
     private val layerPlayerCamera = Camera2D(0f, 0f, 0)

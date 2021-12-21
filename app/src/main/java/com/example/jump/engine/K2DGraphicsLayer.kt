@@ -2,7 +2,7 @@ package com.example.jump.engine
 
 import com.example.jump.game.MainRenderer
 
-class K2DGraphicsLayer() {
+class K2DGraphicsLayer(id: Int) {
     var mObjectList = mutableListOf<GameObject>()
     private var mTextures: ArrayList<Texture2D> = ArrayList()
 
