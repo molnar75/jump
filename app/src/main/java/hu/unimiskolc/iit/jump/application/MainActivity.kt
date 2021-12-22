@@ -3,16 +3,15 @@ package hu.unimiskolc.iit.jump.application
 import android.opengl.GLSurfaceView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.RelativeLayout
+import androidx.appcompat.widget.LinearLayoutCompat
 
-class GameActivity : AppCompatActivity() {
-    private lateinit var gLView: GLSurfaceView
 
+class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Create a GLSurfaceView instance and set it
-        // as the ContentView for this Activity.
-        gLView = MainSurfaceView(this)
-        setContentView(gLView)
+        setContentView(R.layout.activity_main)
     }
 }
