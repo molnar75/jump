@@ -171,7 +171,14 @@ class MoveHandler {
         //move game item
         val gameItemY = gameItem.position.y
         if (gameItemY > -screenHeight) {
-            val pos = Vector2D(gameItem.position.x, gameItemY - speed)
+            val pos: Vector2D =
+                if (gameItem.state == PlayerState.FALL ||
+                    gameItem.state == PlayerState.FALL_LEFT ||
+                    gameItem.state == PlayerState.FALL_RIGHT) {
+                    Vector2D(gameItem.position.x, gameItemY - (speed + 0.5f))
+                } else {
+                    Vector2D(gameItem.position.x, gameItemY - speed)
+                }
             val gameItemSprite = gameItem.mSprites[gameItem.currSprite]
             gameItem.position = pos
             gameItemSprite.setPosition(pos)

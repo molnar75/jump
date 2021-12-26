@@ -17,6 +17,7 @@ class DummyGame(private val context: Context) {
     var gameStarted: Boolean = false
     var endGame: Boolean = false
     var highestPlatform = sceneLoader.layerPlatform.mObjectList[5]
+    var playerScore = 0
 
     val player = sceneLoader.layerPlayer.mObjectList[0]
     val layerPlatform = sceneLoader.layerPlatform
