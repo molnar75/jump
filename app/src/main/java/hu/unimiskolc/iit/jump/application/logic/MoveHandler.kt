@@ -139,7 +139,9 @@ class MoveHandler {
                 platform.position = pos
                 platformSprite.setPosition(pos)
             } else {
-                pos = Vector2D(platform.position.x, dummyGame.highestPlatform.position.y + platformDistance)
+                val side = (0..1).random()
+                val x = if (side == 0) -110f else 10f //schoose platform side
+                pos = Vector2D(x, dummyGame.highestPlatform.position.y + platformDistance)
                 dummyGame.highestPlatform = platform
                 platform.position = pos
                 platformSprite.setPosition(pos)
@@ -155,7 +157,7 @@ class MoveHandler {
             gameItemSprite.setPosition(pos)
         } else {
             dummyGame.gameStarted = false
-            //TODO endgame
+            dummyGame.endGame = true
         }
     }
 }

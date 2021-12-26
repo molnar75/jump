@@ -6,24 +6,13 @@
     app:startDestination="@id/startGameFragment">
 
     <fragment
-        android:id="@+id/gameFragment"
-        android:name="hu.unimiskolc.iit.jump.application.fragment.GameFragment"
-        android:label="game_fragment"
-        tools:layout="@layout/game_fragment" >
-        <action
-            android:id="@+id/action_gameFragment_to_endGameFragment"
-            app:destination="@id/endGameFragment"/>
-    </fragment>
-    <fragment
         android:id="@+id/startGameFragment"
         android:name="hu.unimiskolc.iit.jump.application.fragment.StartGameFragment"
         android:label="start_game_fragment"
         tools:layout="@layout/start_game_fragment" >
         <action
             android:id="@+id/action_startGameFragment_to_gameFragment"
-            app:destination="@id/gameFragment"
-            app:popUpTo="@id/gameFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/gameFragment" />
     </fragment>
     <fragment
         android:id="@+id/endGameFragment"
@@ -34,5 +23,14 @@
             android:id="@+id/action_endGameFragment_to_startGameFragment"
             app:destination="@id/startGameFragment"
             app:popUpTo="@id/startGameFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="hu.unimiskolc.iit.jump.application.fragment.GameFragment"
+        android:label="game_fragment"
+        tools:layout="@layout/game_fragment" >
+        <action
+            android:id="@+id/action_gameFragment_to_endGameFragment"
+            app:destination="@id/endGameFragment" />
     </fragment>
 </navigation>

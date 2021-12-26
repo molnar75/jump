@@ -4,12 +4,13 @@ import android.content.Context
 import android.opengl.GLES30
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
+import hu.unimiskolc.iit.jump.application.MainSurfaceView
 import hu.unimiskolc.iit.jump.application.engine.Utils
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import hu.unimiskolc.iit.jump.application.graph.ShaderProgram
 
-class MainRenderer(private val context: Context) : GLSurfaceView.Renderer {
+class MainRenderer(private val context: Context, private val surfaceView: MainSurfaceView) : GLSurfaceView.Renderer {
 
      val projectionMatrix = FloatArray(16)
      val viewMatrix = FloatArray(16)
@@ -19,7 +20,6 @@ class MainRenderer(private val context: Context) : GLSurfaceView.Renderer {
     lateinit var dummyGame: DummyGame
 
     private val utils = Utils()
-
     // The system calls this method on each redraw of the GLSurfaceView.
     // Use this method as the primary execution point for drawing (and re-drawing) graphic objects.
     override fun onDrawFrame(unused: GL10) {
@@ -29,7 +29,7 @@ class MainRenderer(private val context: Context) : GLSurfaceView.Renderer {
         // Set the camera position (View matrix)
         Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, 200f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
 
-        dummyGame.render(this)
+        dummyGame.render(this, surfaceView)
     }
 
     // The system calls this method once, when creating the GLSurfaceView.

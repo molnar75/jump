@@ -15,7 +15,7 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
         setEGLContextClientVersion(3)
 
         // Set the Renderer for drawing on the GLSurfaceView
-        mainRenderer = MainRenderer(context)
+        mainRenderer = MainRenderer(context, this)
         setRenderer(mainRenderer)
 
         // Render the view only when there is a change in the drawing data
@@ -32,5 +32,9 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
         touchHandler.checkInput(e, gameItem, width)
 
         return true
+    }
+
+    fun endGame() {
+        this.onPause()
     }
 }
