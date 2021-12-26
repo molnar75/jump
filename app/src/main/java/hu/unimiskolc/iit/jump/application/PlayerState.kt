@@ -8,5 +8,7 @@ enum class PlayerState {
     FALL,
     ON_PLATFORM,
     FALL_LEFT,
-    FALL_RIGHT
+    FALL_RIGHT,
+    JUMP_LEFT,
+    JUMP_RIGHT
 }

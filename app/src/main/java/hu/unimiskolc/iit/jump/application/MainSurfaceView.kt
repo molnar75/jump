@@ -29,7 +29,7 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
         val gameItem = mainRenderer.dummyGame.player
         val touchHandler = TouchHandler()
 
-        touchHandler.checkInput(e, gameItem, width)
+        touchHandler.checkInput(e, gameItem, width, height)
 
         return true
     }

@@ -39,6 +39,26 @@ class MoveHandler {
                     gameItem.state = PlayerState.FALL
                 }
             }
+            PlayerState.JUMP_LEFT -> {
+                dummyGame.gameStarted = true
+                if (position.y < (screenHeight - gameItemTextureHeight)) {
+                    gameItem.currSprite = jumpSpriteIndex
+
+                    updateSprite(gameItem, -20f, 50f)
+
+                    gameItem.state = PlayerState.FALL
+                }
+            }
+            PlayerState.JUMP_RIGHT -> {
+                dummyGame.gameStarted = true
+                if (position.y < (screenHeight - gameItemTextureHeight)) {
+                    gameItem.currSprite = jumpSpriteIndex
+
+                    updateSprite(gameItem, 20f, 50f)
+
+                    gameItem.state = PlayerState.FALL
+                }
+            }
             PlayerState.LEFT -> {
                 if (position.x > -screenWidth) {
                     gameItem.currSprite = leftMoveSpriteIndex
