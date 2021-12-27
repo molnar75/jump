@@ -11,8 +11,14 @@ class K2DSceneManager {
     }
 
     fun render(renderer: MainRenderer) {
-        for(scene in mScenes){
+        for (scene in mScenes) {
             scene.render(renderer)
+        }
+    }
+
+    fun cleanup() {
+        for ( i in mScenes) {
+            mScenes.remove(i)
         }
     }
 }

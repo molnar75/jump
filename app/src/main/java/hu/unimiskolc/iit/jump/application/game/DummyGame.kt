@@ -41,4 +41,8 @@ class DummyGame(private val context: Context) {
             surfaceView.endGame()
         }
     }
+
+    fun cleanup() {
+        sceneManager.cleanup()
+    }
 }

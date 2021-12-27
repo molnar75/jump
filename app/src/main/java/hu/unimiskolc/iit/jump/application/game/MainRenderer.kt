@@ -71,4 +71,10 @@ class MainRenderer(private val context: Context, private val surfaceView: MainSu
         // in the onDrawFrame() method
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1f, 1f, 1f, 10000f)
     }
+
+    fun cleanup() {
+        dummyGame.cleanup()
+        lineShader.cleanup()
+        shaderProgram.cleanup()
+    }
 }

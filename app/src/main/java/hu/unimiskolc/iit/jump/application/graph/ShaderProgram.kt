@@ -104,4 +104,11 @@ class ShaderProgram {
             throw Exception("Error in validating shader code: ${glGetProgramInfoLog(programId)}")
         }
     }
+
+    fun cleanup() {
+        unbind();
+        if (programId != 0) {
+            glDeleteProgram(programId);
+        }
+    }
 }

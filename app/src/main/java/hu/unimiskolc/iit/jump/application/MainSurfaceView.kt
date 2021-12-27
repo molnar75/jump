@@ -35,6 +35,7 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
     }
 
     fun endGame() {
+        mainRenderer.cleanup()
         this.onPause()
     }
 }
