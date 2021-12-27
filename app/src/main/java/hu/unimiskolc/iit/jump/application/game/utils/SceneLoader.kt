@@ -14,9 +14,9 @@ class SceneLoader(context: Context) {
         val scene = K2DScene()
 
         scene.registerLayer(layerBackground)
+        scene.registerLayer(layerGround)
         scene.registerLayer(layerPlatform)
         scene.registerLayer(layerPlayer)
-        scene.registerLayer(layerGround)
 
         return scene
     }

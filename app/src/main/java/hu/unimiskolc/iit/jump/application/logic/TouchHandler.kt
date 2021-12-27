@@ -21,16 +21,20 @@ class TouchHandler {
                     gameItem.state = PlayerState.JUMP_RIGHT
                 }
             } else {
-                if (x < width / 2) {
+                if (x < oneThird) {
                     if (gameItem.state == PlayerState.FALL) {
                         gameItem.state = PlayerState.FALL_LEFT
                     } else {
                         gameItem.state = PlayerState.LEFT
                     }
-                } else if (gameItem.state == PlayerState.FALL) {
-                    gameItem.state = PlayerState.FALL_RIGHT
+                } else if(x >= oneThird && x < 2 * oneThird) {
+                    gameItem.state = PlayerState.JUMP
                 } else {
-                    gameItem.state = PlayerState.RIGHT
+                    if (gameItem.state == PlayerState.FALL) {
+                        gameItem.state = PlayerState.FALL_RIGHT
+                    } else {
+                        gameItem.state = PlayerState.RIGHT
+                    }
                 }
             }
         } else if (event.action == MotionEvent.ACTION_UP) {
