@@ -17,7 +17,8 @@ class DummyGame(private val context: Context) {
     var gameStarted: Boolean = false
     var endGame: Boolean = false
     var highestPlatform = sceneLoader.layerPlatform.mObjectList[5]
-    var playerScore = 0
+    var playerScore = 0f
+    private var previousYPosition: Float = -133f
 
     val player = sceneLoader.layerPlayer.mObjectList[0]
     val layerPlatform = sceneLoader.layerPlatform
@@ -36,7 +37,7 @@ class DummyGame(private val context: Context) {
             moveHandler.moveScene(this)
             boundingBoxHandler.checkBoundingBox(this)
         }
-
+        updatePlayerScore()
         if (endGame) {
             surfaceView.endGame()
         }
@@ -44,5 +45,13 @@ class DummyGame(private val context: Context) {
 
     fun cleanup() {
         sceneManager.cleanup()
+    }
+
+    private fun updatePlayerScore() {
+        val y = player.position.y
+        if (y > previousYPosition) {
+            previousYPosition = y
+            playerScore = (y + 133f) / 10
+        }
     }
 }
