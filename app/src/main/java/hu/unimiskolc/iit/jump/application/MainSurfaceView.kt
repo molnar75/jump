@@ -1,8 +1,13 @@
 package hu.unimiskolc.iit.jump.application
 
+import android.app.Activity
 import android.content.Context
 import android.opengl.GLSurfaceView
 import android.view.MotionEvent
+import androidx.fragment.app.findFragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import hu.unimiskolc.iit.jump.application.fragment.GameFragment
 import hu.unimiskolc.iit.jump.application.game.MainRenderer
 import hu.unimiskolc.iit.jump.application.logic.TouchHandler
 
@@ -26,16 +31,20 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
-        val gameItem = mainRenderer.dummyGame.player
+        val player = mainRenderer.dummyGame.player
         val touchHandler = TouchHandler()
 
-        touchHandler.checkInput(e, gameItem, width, height)
+        touchHandler.checkInput(e, player, width, height)
+
 
         return true
     }
 
     fun endGame() {
         mainRenderer.cleanup()
-        this.onPause()
+        renderMode = 0
+        (context as Activity).runOnUiThread() {
+            findNavController().navigate(R.id.action_gameFragment_to_endGameFragment)
+        }
     }
 }
