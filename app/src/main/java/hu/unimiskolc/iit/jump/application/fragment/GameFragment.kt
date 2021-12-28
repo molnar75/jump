@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hu.unimiskolc.iit.jump.application.MainSurfaceView
+import hu.unimiskolc.iit.jump.core.domain.Score
+import org.koin.android.ext.android.inject
 
 class GameFragment : Fragment() {
 
@@ -17,7 +19,7 @@ class GameFragment : Fragment() {
         fun newInstance() = GameFragment()
     }
 
-    private lateinit var viewModel: GameViewModel
+    private val viewModel: GameViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +27,7 @@ class GameFragment : Fragment() {
     ): View? {
         // Create a GLSurfaceView instance and set it
         // as the View for this Fragment.
-        gLView = MainSurfaceView(requireContext())
+        gLView = MainSurfaceView(requireContext(), this)
 
         /*
         //Set the score layout on top of the surface view
@@ -39,6 +41,9 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+    }
+
+    fun endGame(score: Score) {
+        viewModel.endGame(score)
     }
 }

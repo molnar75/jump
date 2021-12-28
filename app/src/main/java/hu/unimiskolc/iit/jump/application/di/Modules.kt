@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val appModule = module {
     single { JumpDatabase.getInstance(androidContext()) }
 
-    viewModel { GameViewModel() }
+    viewModel { GameViewModel(get()) }
     viewModel { StartGameViewModel() }
-    viewModel { EndGameViewModel() }
+    viewModel { EndGameViewModel(get()) }
 }

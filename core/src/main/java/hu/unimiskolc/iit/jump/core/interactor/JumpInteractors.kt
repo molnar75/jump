@@ -1,3 +1,3 @@
 package hu.unimiskolc.iit.jump.core.interactor
 
-class JumpInteractors(val startGame: StartGame, val endGame: EndGame)
+class JumpInteractors(val getResult: GetResult, val endGame: EndGame)

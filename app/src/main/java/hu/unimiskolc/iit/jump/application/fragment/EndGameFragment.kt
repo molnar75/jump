@@ -1,7 +1,5 @@
 package hu.unimiskolc.iit.jump.application.fragment
 
-import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import hu.unimiskolc.iit.jump.application.R
 import hu.unimiskolc.iit.jump.application.databinding.EndGameFragmentBinding
-import android.widget.ArrayAdapter
-import android.widget.TextView
-
+import hu.unimiskolc.iit.jump.application.adapter.ScoreAdapter
+import org.koin.android.ext.android.inject
 
 class EndGameFragment : Fragment() {
 
@@ -23,7 +20,7 @@ class EndGameFragment : Fragment() {
         fun newInstance() = EndGameFragment()
     }
 
-    private lateinit var viewModel: EndGameViewModel
+    private val viewModel: EndGameViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,21 +32,22 @@ class EndGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EndGameViewModel::class.java)
-
         binding.vm = viewModel
 
-        binding.endGameButton.setOnClickListener {
-            findNavController().navigate(R.id.action_endGameFragment_to_startGameFragment)
-        }
+        viewModel.getResult()
+        viewModel.getHighScoreList().observe(viewLifecycleOwner, { scoreList ->
+            if (scoreList != null) {
 
-        val list = listOf("320", "210", "120", "90", "20")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, list)
+                val score = arguments?.getInt("score")
+                viewModel.setScore(score ?: 0)
 
-        val score = arguments?.getInt("score")
-        viewModel.setScore(score ?: 0)
+                binding.endGameButton.setOnClickListener {
+                    findNavController().navigate(R.id.action_endGameFragment_to_startGameFragment)
+                }
 
-        binding.scoreList.adapter = adapter
+                val adapter = ScoreAdapter(requireContext(), scoreList)
+                binding.scoreList.adapter = adapter
+            }
+        })
     }
-
 }

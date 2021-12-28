@@ -2,7 +2,8 @@
     <string name="app_name">Jump</string>
     <string name="start_game">Játék indítása</string>
     <string name="new_game">Új játék</string>
-    <string name="score">Pontszám:</string>
+    <string name="score">Pontszám</string>
     <string name="your_score">Eredmény: %d</string>
     <string name="high_score">Legjobb eredmények</string>
+    <string name="date">Dátum</string>
 </resources>

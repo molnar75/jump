@@ -5,14 +5,15 @@ import android.content.Context
 import android.opengl.GLSurfaceView
 import android.view.MotionEvent
 import androidx.core.os.bundleOf
-import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import hu.unimiskolc.iit.jump.application.fragment.GameFragment
+import hu.unimiskolc.iit.jump.application.fragment.GameViewModel
 import hu.unimiskolc.iit.jump.application.game.MainRenderer
 import hu.unimiskolc.iit.jump.application.logic.TouchHandler
+import hu.unimiskolc.iit.jump.core.domain.Score
+import java.util.*
 
-class MainSurfaceView(context: Context) : GLSurfaceView(context) {
+class MainSurfaceView(context: Context, private val gameFragment: GameFragment) : GLSurfaceView(context) {
 
     private val mainRenderer: MainRenderer
 
@@ -43,9 +44,10 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
     fun endGame() {
         mainRenderer.cleanup()
         renderMode = 0
-        val score = mainRenderer.dummyGame.playerScore.toInt()
+        val score = Score(0, Calendar.getInstance().time, mainRenderer.dummyGame.playerScore.toInt())
         (context as Activity).runOnUiThread() {
-            val bundle = bundleOf("score" to score)
+            gameFragment.endGame(score)
+            val bundle = bundleOf("score" to score.value)
             findNavController().navigate(R.id.action_gameFragment_to_endGameFragment, bundle)
         }
     }
