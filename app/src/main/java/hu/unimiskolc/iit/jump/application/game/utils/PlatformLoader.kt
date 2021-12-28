@@ -4,6 +4,7 @@ import android.content.Context
 import hu.unimiskolc.iit.jump.application.engine.*
 
 class PlatformLoader(context: Context) {
+    private val texturePath = "textures/platforms/platform_test"
 
     private val layerPlatform = K2DGraphicsLayer(2)
     private val layerPlatformCamera = Camera2D(0f, 0f, 0)
@@ -15,12 +16,12 @@ class PlatformLoader(context: Context) {
     private val platform5 = GameObject(Vector2D(10f, 255f))
     private val platform6 = GameObject(Vector2D(-110f, 335f))
 
-    private val platformSprite1 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(10f, -65f), 6)
-    private val platformSprite2 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(-110f, 15f), 6)
-    private val platformSprite3 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(10f, 95f), 6)
-    private val platformSprite4 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(-110f, 175f), 6)
-    private val platformSprite5 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(10f, 255f), 6)
-    private val platformSprite6 = Sprite(context, "textures/platforms/platform_test", 1, Vector2D(-110f, 335f), 6)
+    private val platformSprite1 = Sprite(context, texturePath, 1, Vector2D(10f, -65f), 6)
+    private val platformSprite2 = Sprite(context, texturePath, 1, Vector2D(-110f, 15f), 6)
+    private val platformSprite3 = Sprite(context, texturePath, 1, Vector2D(10f, 95f), 6)
+    private val platformSprite4 = Sprite(context, texturePath, 1, Vector2D(-110f, 175f), 6)
+    private val platformSprite5 = Sprite(context, texturePath, 1, Vector2D(10f, 255f), 6)
+    private val platformSprite6 = Sprite(context, texturePath, 1, Vector2D(-110f, 335f), 6)
 
     fun loadPlatforms(): K2DGraphicsLayer{
         platform1.addSprite(platformSprite1)
