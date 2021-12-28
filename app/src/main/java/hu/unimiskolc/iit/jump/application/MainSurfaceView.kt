@@ -51,4 +51,10 @@ class MainSurfaceView(context: Context, private val gameFragment: GameFragment) 
             findNavController().navigate(R.id.action_gameFragment_to_endGameFragment, bundle)
         }
     }
+
+    fun updateScore(score: Int) {
+        (context as Activity).runOnUiThread() {
+            gameFragment.updateScore(score)
+        }
+    }
 }

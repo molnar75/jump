@@ -37,7 +37,7 @@ class DummyGame(private val context: Context) {
             moveHandler.moveScene(this)
             boundingBoxHandler.checkBoundingBox(this)
         }
-        updatePlayerScore()
+        updatePlayerScore(surfaceView)
         if (endGame) {
             surfaceView.endGame()
         }
@@ -47,11 +47,12 @@ class DummyGame(private val context: Context) {
         sceneManager.cleanup()
     }
 
-    private fun updatePlayerScore() {
+    private fun updatePlayerScore(surfaceView: MainSurfaceView) {
         val y = player.position.y
         if (y > previousYPosition) {
             previousYPosition = y
             playerScore = (y + 133f) / 10
+            surfaceView.updateScore(playerScore.toInt())
         }
     }
 }
