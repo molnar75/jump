@@ -28,6 +28,10 @@ android {
         viewBinding true
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     compileOptions {
         sourceCompatibility rootProject.ext.source_compatibility
         targetCompatibility rootProject.ext.target_compatibility

@@ -7,7 +7,7 @@ class StartGame(private val scoreRepository: ScoreRepository) {
     suspend operator fun invoke() : List<Score> {
         val topScores = scoreRepository.fetchAll()
         topScores.sortedByDescending {it.value}
-        topScores.take(10)
+        topScores.take(5)
         return topScores
     }
 }

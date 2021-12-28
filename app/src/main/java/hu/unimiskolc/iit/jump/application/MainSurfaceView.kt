@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.opengl.GLSurfaceView
 import android.view.MotionEvent
+import androidx.core.os.bundleOf
 import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -36,15 +37,16 @@ class MainSurfaceView(context: Context) : GLSurfaceView(context) {
 
         touchHandler.checkInput(e, player, width, height)
 
-
         return true
     }
 
     fun endGame() {
         mainRenderer.cleanup()
         renderMode = 0
+        val score = mainRenderer.dummyGame.playerScore.toInt()
         (context as Activity).runOnUiThread() {
-            findNavController().navigate(R.id.action_gameFragment_to_endGameFragment)
+            val bundle = bundleOf("score" to score)
+            findNavController().navigate(R.id.action_gameFragment_to_endGameFragment, bundle)
         }
     }
 }
