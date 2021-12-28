@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import hu.unimiskolc.iit.jump.application.fragment.GameFragment
-import hu.unimiskolc.iit.jump.application.fragment.GameViewModel
 import hu.unimiskolc.iit.jump.application.game.MainRenderer
 import hu.unimiskolc.iit.jump.application.logic.TouchHandler
 import hu.unimiskolc.iit.jump.core.domain.Score

@@ -106,9 +106,9 @@ class ShaderProgram {
     }
 
     fun cleanup() {
-        unbind();
+        unbind()
         if (programId != 0) {
-            glDeleteProgram(programId);
+            glDeleteProgram(programId)
         }
     }
 }

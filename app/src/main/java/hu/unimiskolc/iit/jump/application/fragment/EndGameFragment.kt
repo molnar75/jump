@@ -16,10 +16,6 @@ class EndGameFragment : Fragment() {
     private var _binding: EndGameFragmentBinding? = null
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = EndGameFragment()
-    }
-
     private val viewModel: EndGameViewModel by inject()
 
     override fun onCreateView(

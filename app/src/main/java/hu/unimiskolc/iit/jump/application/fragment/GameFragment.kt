@@ -20,10 +20,6 @@ class GameFragment : Fragment() {
     private lateinit var gLView: GLSurfaceView
     private lateinit var secondLayerView: View
 
-    companion object {
-        fun newInstance() = GameFragment()
-    }
-
     private val viewModel: GameViewModel by inject()
 
     override fun onCreateView(

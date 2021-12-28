@@ -141,10 +141,4 @@ class Texture2D(
 
         return transformationMatrix
     }
-
-    fun cleanup() {
-        val names = IntArray(1)
-        names[0] = textureID
-        glDeleteTextures(1, names, 0)
-    }
 }

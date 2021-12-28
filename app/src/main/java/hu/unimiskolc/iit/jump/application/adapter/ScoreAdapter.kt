@@ -11,7 +11,7 @@ import hu.unimiskolc.iit.jump.application.R
 import hu.unimiskolc.iit.jump.core.domain.Score
 import java.util.*
 
-class ScoreAdapter(private val context: Context, private val scoreList: List<Score>) : BaseAdapter() {
+class ScoreAdapter(context: Context, private val scoreList: List<Score>) : BaseAdapter() {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {

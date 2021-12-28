@@ -4,12 +4,12 @@ import android.opengl.GLES20.*
 import android.opengl.Matrix.*
 import hu.unimiskolc.iit.jump.application.graph.ShaderProgram
 
-class BoundingBox2D(newMinPoint: hu.unimiskolc.iit.jump.application.engine.Vector2D, newMaxPoint: hu.unimiskolc.iit.jump.application.engine.Vector2D) {
+class BoundingBox2D(newMinPoint: Vector2D, newMaxPoint: Vector2D) {
     private val aabbPoints2D = 4
-    var minpoint: hu.unimiskolc.iit.jump.application.engine.Vector2D
-    var maxpoint: hu.unimiskolc.iit.jump.application.engine.Vector2D
+    var minpoint: Vector2D
+    var maxpoint: Vector2D
 
-    private var bbPoints: Array<hu.unimiskolc.iit.jump.application.engine.Vector2D>
+    private var bbPoints: Array<Vector2D>
     private var boxHalfWidth: Float
     private var boxHalfHeight: Float
 
@@ -25,18 +25,18 @@ class BoundingBox2D(newMinPoint: hu.unimiskolc.iit.jump.application.engine.Vecto
         boxHalfWidth = 0f
         boxHalfHeight = 0f
         mEnabled = false
-        bbPoints = Array(aabbPoints2D) { hu.unimiskolc.iit.jump.application.engine.Vector2D(0f, 0f) }
+        bbPoints = Array(aabbPoints2D) { Vector2D(0f, 0f) }
         transformationMatrix = FloatArray(16)
         rotationMatrix = FloatArray(16)
-        minpoint = hu.unimiskolc.iit.jump.application.engine.Vector2D(newMinPoint.x, newMinPoint.y)
-        maxpoint = hu.unimiskolc.iit.jump.application.engine.Vector2D(newMaxPoint.x, newMaxPoint.y)
+        minpoint = Vector2D(newMinPoint.x, newMinPoint.y)
+        maxpoint = Vector2D(newMaxPoint.x, newMaxPoint.y)
         setUpBBPoints()
         searchMinMax()
         boxHalfWidth = (maxpoint.x - minpoint.x) / 2.0f
         boxHalfHeight = (maxpoint.y - minpoint.y) / 2.0f
     }
 
-    fun setPoints(min: hu.unimiskolc.iit.jump.application.engine.Vector2D, max: hu.unimiskolc.iit.jump.application.engine.Vector2D){
+    fun setPoints(min: Vector2D, max: Vector2D){
         minpoint.set(min.x, min.y)
         maxpoint.set(max.x, max.y)
 
@@ -58,8 +58,8 @@ class BoundingBox2D(newMinPoint: hu.unimiskolc.iit.jump.application.engine.Vecto
     }
 
     private fun searchMinMax() {
-        val min = hu.unimiskolc.iit.jump.application.engine.Vector2D(bbPoints[0].x, bbPoints[0].y)
-        val max = hu.unimiskolc.iit.jump.application.engine.Vector2D(bbPoints[0].x, bbPoints[0].y)
+        val min = Vector2D(bbPoints[0].x, bbPoints[0].y)
+        val max = Vector2D(bbPoints[0].x, bbPoints[0].y)
 
         for (i in 0 until aabbPoints2D){
             if (bbPoints[i].x < min.x) {
@@ -93,7 +93,7 @@ class BoundingBox2D(newMinPoint: hu.unimiskolc.iit.jump.application.engine.Vecto
         setUpBBPoints()
     }
 
-    private fun transformPoint(vec: hu.unimiskolc.iit.jump.application.engine.Vector2D){
+    private fun transformPoint(vec: Vector2D){
         val x = vec.x
         val y = vec.y
 
@@ -101,7 +101,7 @@ class BoundingBox2D(newMinPoint: hu.unimiskolc.iit.jump.application.engine.Vecto
         vec.y = x * transformationMatrix[1] + y * transformationMatrix[5] + transformationMatrix[13]
     }
 
-    fun transformByTranslate(translateVector: hu.unimiskolc.iit.jump.application.engine.Vector2D) {
+    fun transformByTranslate(translateVector: Vector2D) {
         setIdentityM(transformationMatrix, 0)
         translateM(transformationMatrix, 0, translateVector.x, translateVector.y, 0f)
 
@@ -131,7 +131,7 @@ class BoundingBox2D(newMinPoint: hu.unimiskolc.iit.jump.application.engine.Vecto
 
     fun render(shaderProgram: ShaderProgram) {
 
-        val util = hu.unimiskolc.iit.jump.application.engine.Utils()
+        val util = Utils()
 
         if (!mEnabled){
             return

@@ -55,17 +55,11 @@ class Sprite(private val context: Context, filenames: String, numOfFrames: Int, 
         }
     }
 
-    fun cleanup(){
-        for(frame in mvFrames) {
-            frame.mFrame.cleanup()
-        }
-    }
-
-    fun getCurrentFrameTransformedBoundingBox(): hu.unimiskolc.iit.jump.application.engine.BoundingBox2D {
+    fun getCurrentFrameTransformedBoundingBox(): BoundingBox2D {
         val currentFrame = mvFrames[miActualFrame]
 
-        val original: hu.unimiskolc.iit.jump.application.engine.BoundingBox2D = currentFrame.mBBoxOriginal
-        val transformed: hu.unimiskolc.iit.jump.application.engine.BoundingBox2D = currentFrame.mBBoxTransformed
+        val original: BoundingBox2D = currentFrame.mBBoxOriginal
+        val transformed: BoundingBox2D = currentFrame.mBBoxTransformed
         transformed.setPoints(original.minpoint, original.maxpoint)
 
         transformed.transformByRotate(0f)

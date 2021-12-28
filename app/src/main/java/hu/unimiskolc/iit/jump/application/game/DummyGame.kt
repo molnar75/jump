@@ -7,7 +7,7 @@ import hu.unimiskolc.iit.jump.application.game.utils.SceneLoader
 import hu.unimiskolc.iit.jump.application.logic.BoundingBoxHandler
 import hu.unimiskolc.iit.jump.application.logic.MoveHandler
 
-class DummyGame(private val context: Context) {
+class DummyGame(context: Context) {
     private val moveHandler = MoveHandler()
     private val boundingBoxHandler = BoundingBoxHandler()
 

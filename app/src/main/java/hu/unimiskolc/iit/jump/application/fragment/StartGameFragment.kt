@@ -15,10 +15,6 @@ class StartGameFragment : Fragment() {
     private var _binding: StartGameFragmentBinding? = null
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = StartGameFragment()
-    }
-
     private lateinit var viewModel: StartGameViewModel
 
     override fun onCreateView(

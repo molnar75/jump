@@ -13,7 +13,7 @@ class GameObject(var position: Vector2D, var state: PlayerState = PlayerState.WA
         mSprites.add(sprite)
     }
 
-    fun getBoundingBox(): hu.unimiskolc.iit.jump.application.engine.BoundingBox2D {
+    fun getBoundingBox(): BoundingBox2D {
         return mSprites[currSprite].getCurrentFrameTransformedBoundingBox()
     }
 
@@ -24,11 +24,5 @@ class GameObject(var position: Vector2D, var state: PlayerState = PlayerState.WA
         sprite.render(renderer)
 
         sprite.getCurrentFrameTransformedBoundingBox()
-    }
-
-    fun cleanup(){
-        for(sprite in mSprites){
-            sprite.cleanup()
-        }
     }
 }
