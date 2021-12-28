@@ -34,5 +34,8 @@
             android:id="@+id/action_gameFragment_to_endGameFragment"
             app:destination="@id/endGameFragment"
             app:popUpTo="@id/endGameFragment"/>
+        <argument
+            android:name="score"
+            app:argType="integer" />
     </fragment>
 </navigation>

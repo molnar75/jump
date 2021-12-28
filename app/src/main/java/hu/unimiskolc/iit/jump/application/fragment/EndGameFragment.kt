@@ -30,20 +30,19 @@ class EndGameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
+        val score = arguments?.getInt("score")
+        viewModel.setScore(score ?: 0)
+
         viewModel.getResult()
         viewModel.getHighScoreList().observe(viewLifecycleOwner, { scoreList ->
             if (scoreList != null) {
-
-                val score = arguments?.getInt("score")
-                viewModel.setScore(score ?: 0)
-
-                binding.endGameButton.setOnClickListener {
-                    findNavController().navigate(R.id.action_endGameFragment_to_startGameFragment)
-                }
-
                 val adapter = ScoreAdapter(requireContext(), scoreList)
                 binding.scoreList.adapter = adapter
             }
         })
+
+        binding.endGameButton.setOnClickListener {
+            findNavController().navigate(R.id.action_endGameFragment_to_startGameFragment)
+        }
     }
 }
