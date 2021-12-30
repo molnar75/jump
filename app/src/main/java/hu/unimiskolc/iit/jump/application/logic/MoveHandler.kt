@@ -43,7 +43,7 @@ class MoveHandler {
             }
             PlayerState.JUMP_LEFT -> {
                 dummyGame.gameStarted = true
-                if (position.y < (screenHeight - gameItemTextureHeight)) {
+                if (position.y < (screenHeight - gameItemTextureHeight) && position.x > -screenWidth) {
                     gameItem.currSprite = jumpSpriteIndex
 
                     updateSprite(gameItem, -20f, 50f)
@@ -53,7 +53,7 @@ class MoveHandler {
             }
             PlayerState.JUMP_RIGHT -> {
                 dummyGame.gameStarted = true
-                if (position.y < (screenHeight - gameItemTextureHeight)) {
+                if (position.y < (screenHeight - gameItemTextureHeight) && position.x < (screenWidth - gameItemTextureWidth)) {
                     gameItem.currSprite = jumpSpriteIndex
 
                     updateSprite(gameItem, 20f, 50f)
