@@ -79,14 +79,14 @@ class MoveHandler {
                 }
             }
             PlayerState.FALL_LEFT -> {
-                if (position.x > -screenWidth) {
+                if (position.x > -screenWidth && position.y > -screenHeight) {
                     gameItem.currSprite = leftMoveSpriteIndex
 
                     updateSprite(gameItem, -speed, -1f)
                 }
             }
             PlayerState.FALL_RIGHT -> {
-                if (position.x < (screenWidth - gameItemTextureWidth)) {
+                if (position.x < (screenWidth - gameItemTextureWidth) && position.y > -screenHeight) {
                     gameItem.currSprite = rightMoveSpriteIndex
 
                     updateSprite(gameItem, speed, -1f)
@@ -94,6 +94,8 @@ class MoveHandler {
             }
             PlayerState.WAIT -> {
                 gameItem.currSprite = waitSpriteIndex
+
+                updateSprite(gameItem, 0f, 0f)
             }
         }
     }

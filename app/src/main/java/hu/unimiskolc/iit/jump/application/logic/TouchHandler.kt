@@ -11,9 +11,11 @@ import hu.unimiskolc.iit.jump.application.engine.GameObject
 import hu.unimiskolc.iit.jump.application.game.DummyGame
 
 class TouchHandler {
-    fun checkInput(event: MotionEvent, player: GameObject, width: Int, height: Int) {
+    fun checkInput(event: MotionEvent, dummyGame: DummyGame, width: Int, height: Int) {
         val x: Float = event.x
         val y: Float = event.y
+        val player = dummyGame.player
+        val gameStarted = dummyGame.gameStarted
 
         if (event.action == MotionEvent.ACTION_DOWN) {
             val oneThird = width / 3
@@ -28,7 +30,7 @@ class TouchHandler {
                 }
             } else {
                 if (x < oneThird) {
-                    if (player.state == PlayerState.FALL) {
+                    if (player.state == PlayerState.FALL && gameStarted) {
                         player.state = PlayerState.FALL_LEFT
                     } else {
                         player.state = PlayerState.LEFT
@@ -36,7 +38,7 @@ class TouchHandler {
                 } else if(x >= oneThird && x < 2 * oneThird) {
                     player.state = PlayerState.JUMP
                 } else {
-                    if (player.state == PlayerState.FALL) {
+                    if (player.state == PlayerState.FALL && gameStarted) {
                         player.state = PlayerState.FALL_RIGHT
                     } else {
                         player.state = PlayerState.RIGHT
@@ -44,8 +46,11 @@ class TouchHandler {
                 }
             }
         } else if (event.action == MotionEvent.ACTION_UP) {
-            if (player.state != PlayerState.ON_PLATFORM) {
+            if (player.state != PlayerState.ON_PLATFORM && gameStarted) {
                 player.state = PlayerState.FALL
+            }
+            if(!gameStarted) {
+                player.state = PlayerState.WAIT
             }
         }
     }
