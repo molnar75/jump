@@ -20,6 +20,7 @@ class BoundingBoxHandler {
                         ((playerBox.minpoint.x + 20) >= platformBox.minpoint.x && (playerBox.minpoint.x + 20) <= platformBox.maxpoint.x)
                     ) {
                         dummyGame.player.state = PlayerState.ON_PLATFORM
+                        dummyGame.updatePlayerScore(platform)
                     }
                 }
             }

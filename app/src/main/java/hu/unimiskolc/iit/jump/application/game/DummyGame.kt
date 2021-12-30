@@ -18,7 +18,9 @@ class DummyGame(context: Context) {
     var endGame: Boolean = false
     var highestPlatform = sceneLoader.layerPlatform.mObjectList[5]
     var playerScore = 0f
-    private var previousYPosition: Float = -133f
+
+    private var previousPlatform: GameObject? = null
+    private lateinit var  mainSurfaceView: MainSurfaceView
 
     val player = sceneLoader.layerPlayer.mObjectList[0]
     val layerPlatform = sceneLoader.layerPlatform
@@ -31,13 +33,13 @@ class DummyGame(context: Context) {
     }
 
     fun render(renderer: MainRenderer, surfaceView: MainSurfaceView) {
+        mainSurfaceView = surfaceView
         sceneManager.render(renderer)
         moveHandler.updatePlayerPosition(this)
         if (gameStarted) {
             moveHandler.moveScene(this)
             boundingBoxHandler.checkBoundingBox(this)
         }
-        updatePlayerScore(surfaceView)
         if (endGame) {
             surfaceView.endGame()
         }
@@ -47,12 +49,32 @@ class DummyGame(context: Context) {
         sceneManager.cleanup()
     }
 
-    private fun updatePlayerScore(surfaceView: MainSurfaceView) {
-        val y = player.position.y
-        if (y > previousYPosition) {
-            previousYPosition = y
-            playerScore = (y + 133f) / 10
-            surfaceView.updateScore(playerScore.toInt())
+    fun updatePlayerScore(platform: GameObject) {
+        if (previousPlatform != null) {
+            val previousY = previousPlatform!!.position.y
+            val y = platform.position.y
+            if (previousY < y) {
+                val intermediatePlatformNumber = getIntermediatePlatformNumber(previousY, y)
+                playerScore += intermediatePlatformNumber * 10
+                previousPlatform = platform
+            }
+        } else {
+            playerScore += 10
+            previousPlatform = platform
         }
+        mainSurfaceView.updateScore(playerScore.toInt())
+    }
+
+    private fun getIntermediatePlatformNumber(previousPosition: Float, position: Float): Int {
+        var intermediatePlatformNumber = 1
+
+        for (platform in layerPlatform.mObjectList) {
+            val y = platform.position.y
+            if(y > previousPosition && y < position) {
+                intermediatePlatformNumber += 1
+            }
+        }
+
+        return intermediatePlatformNumber
     }
 }
