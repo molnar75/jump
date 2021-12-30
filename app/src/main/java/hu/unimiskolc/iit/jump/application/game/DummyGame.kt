@@ -17,7 +17,9 @@ class DummyGame(context: Context) {
     var gameStarted: Boolean = false
     var endGame: Boolean = false
     var highestPlatform = sceneLoader.layerPlatform.mObjectList[5]
-    var playerScore = 0f
+    var playerScore = 0
+
+    private var nextSpeedUp = 200
 
     private var previousPlatform: GameObject? = null
     private lateinit var  mainSurfaceView: MainSurfaceView
@@ -62,7 +64,13 @@ class DummyGame(context: Context) {
             playerScore += 10
             previousPlatform = platform
         }
-        mainSurfaceView.updateScore(playerScore.toInt())
+
+        if (playerScore >= nextSpeedUp) {
+            moveHandler.speedUpGame()
+            nextSpeedUp += 200
+        }
+
+        mainSurfaceView.updateScore(playerScore)
     }
 
     private fun getIntermediatePlatformNumber(previousPosition: Float, position: Float): Int {

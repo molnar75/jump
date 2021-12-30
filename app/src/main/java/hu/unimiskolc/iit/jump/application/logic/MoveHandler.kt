@@ -16,6 +16,8 @@ class MoveHandler {
     private val platformHeight = 17
     private val platformDistance = 80
 
+    private var speed = 0.5f
+
     fun updatePlayerPosition(dummyGame: DummyGame) {
         val gameItem = dummyGame.player
         val state = gameItem.state
@@ -109,7 +111,6 @@ class MoveHandler {
     }
 
     fun moveScene(dummyGame: DummyGame) {
-        val speed = 0.5f
         val backgroundShift = 795f
         val platformBottom = -screenHeight - platformHeight
 
@@ -188,5 +189,9 @@ class MoveHandler {
             dummyGame.gameStarted = false
             dummyGame.endGame = true
         }
+    }
+
+    fun speedUpGame() {
+        speed += 0.2f
     }
 }
