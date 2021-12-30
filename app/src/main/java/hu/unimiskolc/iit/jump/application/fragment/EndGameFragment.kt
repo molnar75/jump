@@ -20,6 +20,8 @@ class EndGameFragment : Fragment() {
 
     private val viewModel: EndGameViewModel by inject()
 
+    private var scorePosition: Int? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,11 +41,11 @@ class EndGameFragment : Fragment() {
         viewModel.getHighScoreList().observe(viewLifecycleOwner, { scoreList ->
             if (scoreList != null) {
 
-                val text: String = if (isScoreInTop(score, scoreList)) "TOP eredményt ért el:  ${score?.value ?: 0}" else "Eredmény:  ${score?.value ?: 0}"
+                val text: String = if (isScoreInTop(score, scoreList)) "Új TOP eredmény:  ${score?.value ?: 0}" else "Eredmény:  ${score?.value ?: 0}"
 
                 binding.scoreText.text = text
 
-                val adapter = ScoreAdapter(requireContext(), scoreList)
+                val adapter = ScoreAdapter(requireContext(), scoreList, scorePosition)
                 binding.scoreList.adapter = adapter
             }
         })
@@ -60,6 +62,7 @@ class EndGameFragment : Fragment() {
             for (item in scoreList) {
                 if(item.date == score.date && item.value == score.value) {
                     isIn = true
+                    scorePosition = scoreList.indexOf(item)
                 }
             }
         }

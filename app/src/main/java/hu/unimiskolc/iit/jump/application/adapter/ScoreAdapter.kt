@@ -9,9 +9,10 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import hu.unimiskolc.iit.jump.application.R
 import hu.unimiskolc.iit.jump.core.domain.Score
+import java.text.SimpleDateFormat
 import java.util.*
 
-class ScoreAdapter(context: Context, private val scoreList: List<Score>) : BaseAdapter() {
+class ScoreAdapter(context: Context, private val scoreList: List<Score>, private val scorePosition: Int?) : BaseAdapter() {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
@@ -34,13 +35,13 @@ class ScoreAdapter(context: Context, private val scoreList: List<Score>) : BaseA
 
         val score = getItem(position) as Score
 
-        val calendar = GregorianCalendar()
-        calendar.time = score.date
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd. HH:mm:ss")
+        val date = simpleDateFormat.format(score.date)
 
-        val date = "$year. $month. $day."
+        if (scorePosition != null && position == scorePosition) {
+            dateTextView.setBackgroundResource(R.color.high_score_blue)
+            valueTextView.setBackgroundResource(R.color.high_score_blue)
+        }
 
         dateTextView.text = date
         valueTextView.text = score.value.toString()
