@@ -46,7 +46,7 @@ class MainSurfaceView(context: Context, private val gameFragment: GameFragment) 
         val score = Score(0, Calendar.getInstance().time, mainRenderer.dummyGame.playerScore.toInt())
         (context as Activity).runOnUiThread() {
             gameFragment.endGame(score)
-            val bundle = bundleOf("score" to score.value)
+            val bundle = bundleOf("score" to score)
             findNavController().navigate(R.id.action_gameFragment_to_endGameFragment, bundle)
         }
     }

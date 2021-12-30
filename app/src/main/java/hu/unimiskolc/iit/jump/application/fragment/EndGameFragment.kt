@@ -9,7 +9,9 @@ import androidx.navigation.fragment.findNavController
 import hu.unimiskolc.iit.jump.application.R
 import hu.unimiskolc.iit.jump.application.databinding.EndGameFragmentBinding
 import hu.unimiskolc.iit.jump.application.adapter.ScoreAdapter
+import hu.unimiskolc.iit.jump.core.domain.Score
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class EndGameFragment : Fragment() {
 
@@ -28,14 +30,19 @@ class EndGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = viewModel
-
-        val score = arguments?.getInt("score")
-        viewModel.setScore(score ?: 0)
 
         viewModel.getResult()
+
+        val score = (arguments?.getParcelable("score") as? Score)
+        viewModel.setScore(score?.value ?: 0)
+
         viewModel.getHighScoreList().observe(viewLifecycleOwner, { scoreList ->
             if (scoreList != null) {
+
+                val text: String = if (isScoreInTop(score, scoreList)) "TOP eredményt ért el:  ${score?.value ?: 0}" else "Eredmény:  ${score?.value ?: 0}"
+
+                binding.scoreText.text = text
+
                 val adapter = ScoreAdapter(requireContext(), scoreList)
                 binding.scoreList.adapter = adapter
             }
@@ -44,5 +51,19 @@ class EndGameFragment : Fragment() {
         binding.endGameButton.setOnClickListener {
             findNavController().navigate(R.id.action_endGameFragment_to_startGameFragment)
         }
+    }
+
+    private fun isScoreInTop(score: Score?, scoreList: List<Score>): Boolean {
+        var isIn = false
+
+         if (score != null) {
+            for (item in scoreList) {
+                if(item.date == score.date && item.value == score.value) {
+                    isIn = true
+                }
+            }
+        }
+
+        return isIn
     }
 }

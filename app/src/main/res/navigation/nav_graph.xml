@@ -36,6 +36,6 @@
             app:popUpTo="@id/endGameFragment"/>
         <argument
             android:name="score"
-            app:argType="integer" />
+            app:argType="hu.unimiskolc.iit.jump.core.domain.Score" />
     </fragment>
 </navigation>
