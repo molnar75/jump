@@ -14,74 +14,102 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:textColor="@color/dark_blue"
-        app:layout_constraintBottom_toTopOf="@+id/score_title"
+        app:layout_constraintBottom_toTopOf="@+id/high_score_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/high_score_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/high_score"
-        android:textSize="20sp"
-        android:textColor="@color/dark_blue"
-        app:layout_constraintBottom_toTopOf="@+id/score_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/score_text"
-        android:layout_marginStart="10dp"/>
-
-    <LinearLayout
-        android:id = "@+id/score_title"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/high_score_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/score_list_layout"
-        app:layout_constraintTop_toBottomOf="@+id/high_score_text"
+        app:layout_constraintBottom_toTopOf="@+id/endGameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:weightSum="100"
+        app:layout_constraintTop_toBottomOf="@id/score_text"
+        android:background="@drawable/highscore_layout_bg"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
         <TextView
-            android:id="@+id/date_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date"
-            android:textSize="17sp"
-            android:textColor="@color/dark_blue"
-            android:layout_weight="50"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/value_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/score"
-            android:textSize="17sp"
-            android:textColor="@color/dark_blue"
-            android:layout_weight="50"
-            android:textStyle="bold"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id = "@+id/score_list_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/endGameButton"
-        app:layout_constraintTop_toBottomOf="@+id/score_title"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ListView
-            android:id="@+id/score_list"
+            android:id="@+id/high_score_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp" />
+            android:text="@string/high_score"
+            android:textSize="25sp"
+            android:textColor="@color/dark_blue"
+            app:layout_constraintBottom_toTopOf="@+id/score_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id = "@+id/score_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/score_list_layout"
+            app:layout_constraintTop_toBottomOf="@+id/high_score_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:weightSum="100"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/counter_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textColor="@color/dark_blue"
+                android:layout_weight="20"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="55"
+                android:text="@string/date"
+                android:textColor="@color/dark_blue"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score"
+                android:textSize="17sp"
+                android:textColor="@color/dark_blue"
+                android:layout_weight="35"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/score_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/score_title"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <ListView
+                android:id="@+id/score_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/endGameButton"
@@ -91,7 +119,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score_list_layout"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/high_score_layout"
+        app:layout_constraintWidth_percent="0.5"
+        android:backgroundTint="@color/button_blue"
+        android:textColor="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

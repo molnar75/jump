@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
 import android.widget.TextView
 import hu.unimiskolc.iit.jump.application.R
 import hu.unimiskolc.iit.jump.core.domain.Score
@@ -32,22 +33,26 @@ class ScoreAdapter(context: Context, private val scoreList: List<Score>, private
 
         val dateTextView = rowView.findViewById(R.id.score_date) as TextView
         val valueTextView = rowView.findViewById(R.id.score_value) as TextView
+        val counterTextView = rowView.findViewById(R.id.score_counter) as TextView
 
         val score = getItem(position) as Score
 
         val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd. HH:mm:ss")
         val date = simpleDateFormat.format(score.date)
+        val positionString = "${(position + 1)}."
 
         if (scorePosition != null && position == scorePosition) {
-            dateTextView.setBackgroundResource(R.color.high_score_blue)
-            valueTextView.setBackgroundResource(R.color.high_score_blue)
+            val mainLayout = rowView.findViewById(R.id.main_layout) as LinearLayout
+            mainLayout.setBackgroundResource(R.drawable.highscore_bg)
         }
 
         dateTextView.text = date
         valueTextView.text = score.value.toString()
+        counterTextView.text = positionString
 
         dateTextView.setTextColor(Color.BLACK)
         valueTextView.setTextColor(Color.BLACK)
+        counterTextView.setTextColor(Color.BLACK)
 
         return rowView
     }
