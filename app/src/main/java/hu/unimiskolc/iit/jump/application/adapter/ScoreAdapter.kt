@@ -11,7 +11,6 @@ import android.widget.TextView
 import hu.unimiskolc.iit.jump.application.R
 import hu.unimiskolc.iit.jump.core.domain.Score
 import java.text.SimpleDateFormat
-import java.util.*
 
 class ScoreAdapter(context: Context, private val scoreList: List<Score>, private val scorePosition: Int?) : BaseAdapter() {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

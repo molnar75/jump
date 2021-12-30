@@ -11,7 +11,6 @@ import hu.unimiskolc.iit.jump.application.databinding.EndGameFragmentBinding
 import hu.unimiskolc.iit.jump.application.adapter.ScoreAdapter
 import hu.unimiskolc.iit.jump.core.domain.Score
 import org.koin.android.ext.android.inject
-import java.util.*
 
 class EndGameFragment : Fragment() {
 

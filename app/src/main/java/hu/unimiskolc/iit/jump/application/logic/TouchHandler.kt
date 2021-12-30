@@ -1,13 +1,7 @@
 package hu.unimiskolc.iit.jump.application.logic
 
-import android.app.Activity
-import android.content.Context
 import android.view.MotionEvent
-import android.view.View
-import androidx.navigation.Navigation
 import hu.unimiskolc.iit.jump.application.PlayerState
-import hu.unimiskolc.iit.jump.application.R
-import hu.unimiskolc.iit.jump.application.engine.GameObject
 import hu.unimiskolc.iit.jump.application.game.DummyGame
 
 class TouchHandler {

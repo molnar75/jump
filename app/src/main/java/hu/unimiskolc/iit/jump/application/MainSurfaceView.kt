@@ -42,7 +42,7 @@ class MainSurfaceView(context: Context, private val gameFragment: GameFragment) 
     fun endGame() {
         mainRenderer.cleanup()
         renderMode = 0
-        val score = Score(0, Calendar.getInstance().time, mainRenderer.dummyGame.playerScore.toInt())
+        val score = Score(0, Calendar.getInstance().time, mainRenderer.dummyGame.playerScore)
         (context as Activity).runOnUiThread() {
             gameFragment.endGame(score)
             val bundle = bundleOf("score" to score)

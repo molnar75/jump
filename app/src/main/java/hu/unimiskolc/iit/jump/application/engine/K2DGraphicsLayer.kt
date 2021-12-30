@@ -36,7 +36,7 @@ class K2DGraphicsLayer(id: Int) {
         }
 
         if (mCamera != null){
-           // mCamera!!.setViewMatrix(viewMatrix) //TODO
+           // mCamera!!.setViewMatrix(viewMatrix)
         }
 
         for(texture in mTextures){

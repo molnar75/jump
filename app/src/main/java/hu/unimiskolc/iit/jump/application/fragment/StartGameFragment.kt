@@ -28,7 +28,6 @@ class StartGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(StartGameViewModel::class.java)
-        // TODO: Use the ViewModel
 
         binding.startGameButton.setOnClickListener {
             findNavController().navigate(R.id.action_startGameFragment_to_gameFragment)

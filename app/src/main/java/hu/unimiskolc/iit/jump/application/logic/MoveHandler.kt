@@ -99,6 +99,7 @@ class MoveHandler {
 
                 updateSprite(gameItem, 0f, 0f)
             }
+            else -> {}
         }
     }
 
